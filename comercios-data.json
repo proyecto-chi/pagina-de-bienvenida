@@ -89,18 +89,39 @@
       ]
     },
     {
-      "nombre": "Nombre Comercio 7",
-      "categoria": "Bienestar",
+      "nombre": "Yogourt",
+      "categoria": "Alimentos",
       "icono": "fa-solid fa-spa",
       "banner": "banner-7",
       "whatsapp": "",
       "descripcion": "Descripción breve del comercio. Qué ofrece, su propósito y por qué hace parte de la comunidad ᚲᚺᛁ.",
       "productos": [
         { "nombre": "Nombre Producto 1", "descripcion": "Descripción corta del producto.", "precio": "$0 COP" },
-        { "nombre": "Nombre Producto 2", "descripcion": "Descripción corta del producto.", "precio": "$0 COP" },
-        { "nombre": "Nombre Producto 3", "descripcion": "Descripción corta del producto.", "precio": "$0 COP" },
-        { "nombre": "Nombre Producto 4", "descripcion": "Descripción corta del producto.", "precio": "$0 COP" },
-        { "nombre": "Nombre Producto 5", "descripcion": "Descripción corta del producto.", "precio": "$0 COP" }
+        { "nombre": "Nombre Producto 2", "descripcion": "Descripción corta del producto.", "precio": "$0 COP" }
+      ]
+    },
+    {
+      "nombre": "Vinagres",
+      "categoria": "Alimentos",
+      "icono": "fa-solid fa-spa",
+      "banner": "banner-7",
+      "whatsapp": "",
+      "descripcion": "Descripción breve del comercio. Qué ofrece, su propósito y por qué hace parte de la comunidad ᚲᚺᛁ.",
+      "productos": [
+        { "nombre": "Nombre Producto 1", "descripcion": "Descripción corta del producto.", "precio": "$0 COP" },
+        { "nombre": "Nombre Producto 2", "descripcion": "Descripción corta del producto.", "precio": "$0 COP" }
+      ]
+    },
+    {
+      "nombre": "Cafe",
+      "categoria": "Alimentos",
+      "icono": "fa-solid fa-spa",
+      "banner": "banner-7",
+      "whatsapp": "",
+      "descripcion": "Descripción breve del comercio. Qué ofrece, su propósito y por qué hace parte de la comunidad ᚲᚺᛁ.",
+      "productos": [
+        { "nombre": "Nombre Producto 1", "descripcion": "Descripción corta del producto.", "precio": "$0 COP" },
+        { "nombre": "Nombre Producto 2", "descripcion": "Descripción corta del producto.", "precio": "$0 COP" }
       ]
     }
   ]
