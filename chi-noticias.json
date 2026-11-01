@@ -1,25 +1,14 @@
 {
   "noticias": [
     {
-      "fecha": "2026-10-28",
-      "descripcion": "EJEMPLO: Se vinculan dos nuevos comerciantes a la red.",
-      "noticia": "EJEMPLO: aquí va el texto completo de la noticia.\n\nPuedes escribir varios párrafos separándolos con una línea en blanco.",
-      "enlace": "https://ejemplo.com"
+      "fecha": "2026-10-21",
+      "descripcion": "IMPORTANTE!!! Cambio en el protocolo de emision de la moneda",
+      "noticia": "Dado un cambio en la formula de calculo del incremento semanal, se decicio subir a: Efecto semanal en el precio del ᚲᚺᛁ-1: 1.5 horas X 8000 pesos/hora X 1/x ᚲᚺᛁ-1 = xpesos/ᚲᚺᛁ-1",
     },
     {
-      "fecha": "2026-10-15",
-      "descripcion": "EJEMPLO: Nueva jornada de encuentro de la comunidad.",
-      "noticia": "EJEMPLO: detalle de la jornada."
+      "fecha": "2026-11-01",
+      "descripcion": "16 semanas de consenso, 25 miembros únicos y un promedio de 7 miembros por semana.",
+      "noticia": "Entre el 15 de julio y el 31 de octubre de 2026 la DAO completó 16 semanas consecutivas de consenso, sin saltarse ninguna.\n\nMiembros: 25 personas distintas han participado hasta hoy. En promedio hay 7,1 miembros en las salas cada semana (mínimo 4, máximo 9). Se suma casi 1 miembro nuevo por semana.\n\nConstancia: un núcleo de 9 miembros ha participado 6 semanas o más, y cerca del 61 % de quienes están en una semana repite en la siguiente. Otros 9 miembros han participado una sola vez, así que hay espacio para que más personas se queden.\n\nValor: el precio pasó de 106,11 a 681,57 pesos por ᚲᚺᛁ-1, unas 6,4 veces más en estas 16 semanas."
     },
-    {
-      "fecha": "2026-10-02",
-      "descripcion": "EJEMPLO: Actualización del valor de la moneda.",
-      "noticia": "EJEMPLO: detalle de la actualización."
-    },
-    {
-      "fecha": "2026-09-20",
-      "descripcion": "EJEMPLO: Primer encuentro de comerciantes.",
-      "noticia": "EJEMPLO: detalle del encuentro."
-    }
   ]
 }
