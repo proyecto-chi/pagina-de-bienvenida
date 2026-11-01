@@ -1,0 +1,25 @@
+{
+  "noticias": [
+    {
+      "fecha": "2026-10-28",
+      "descripcion": "EJEMPLO: Se vinculan dos nuevos comerciantes a la red.",
+      "noticia": "EJEMPLO: aquí va el texto completo de la noticia.\n\nPuedes escribir varios párrafos separándolos con una línea en blanco.",
+      "enlace": "https://ejemplo.com"
+    },
+    {
+      "fecha": "2026-10-15",
+      "descripcion": "EJEMPLO: Nueva jornada de encuentro de la comunidad.",
+      "noticia": "EJEMPLO: detalle de la jornada."
+    },
+    {
+      "fecha": "2026-10-02",
+      "descripcion": "EJEMPLO: Actualización del valor de la moneda.",
+      "noticia": "EJEMPLO: detalle de la actualización."
+    },
+    {
+      "fecha": "2026-09-20",
+      "descripcion": "EJEMPLO: Primer encuentro de comerciantes.",
+      "noticia": "EJEMPLO: detalle del encuentro."
+    }
+  ]
+}
