@@ -1,1125 +1,1151 @@
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1P98J72FX4"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-1P98J72FX4');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ᚲᚺᛁ | Nuestra comunidad, nuestra moneda</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <style>
-
-    :root{
-        --green:#57B61F;
-        --green-light:#6dd629;
-        --black:#0B0B0B;
-        --dark:#111111;
-        --card:#171717;
-        --white:#ffffff;
-    }
-
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-        font-family:'Poppins',sans-serif;
-    }
-
-    html{
-        scroll-behavior:smooth;
-    }
-
-    body{
-        background:var(--black);
-        color:white;
-    }
-
-    /* HEADER */
-
-    header{
-        position:fixed;
-        width:100%;
-        top:0;
-        z-index:1000;
-        background:rgba(0,0,0,.90);
-        backdrop-filter:blur(10px);
-    }
-
-    .container{
-        width:90%;
-        max-width:1200px;
-        margin:auto;
-    }
-
-    .navbar{
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding:20px 0;
-    }
-
-    .logo{
-        display:flex;
-        align-items:center;
-        gap:15px;
-    }
-
-    .logo img{
-        width:55px;
-    }
-
-    .logo h2{
-        color:var(--green);
-    }
-
-    nav ul{
-        list-style:none;
-        display:flex;
-        gap:25px;
-    }
-
-    nav a{
-        color:white;
-        text-decoration:none;
-        transition:.3s;
-    }
-
-    nav a:hover{
-        color:var(--green);
-    }
-
-    nav a.active{
-        color:var(--green);
-    }
-    .menu-toggle{
-        display:none;
-        background:none;
-        border:none;
-        color:white;
-        font-size:26px;
-        cursor:pointer;
-        padding:5px 10px;
-    }
-    /* HERO */
-
-    .hero{
-        min-height:100vh;
-        display:flex;
-        align-items:center;
-        background:
-        radial-gradient(circle at center,
-        rgba(87,182,31,.20),
-        transparent 50%);
-    }
-
-    .hero-content{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:50px;
-        align-items:center;
-    }
-
-    .hero h1{
-        font-size:4rem;
-        line-height:1.1;
-        margin-bottom:20px;
-    }
-
-    .hero h1 span{
-        color:var(--green);
-    }
-
-    .hero p{
-        color:#cfcfcf;
-        margin-bottom:30px;
-    }
-
-    .btn{
-        background:var(--green);
-        color:white;
-        text-decoration:none;
-        padding:15px 35px;
-        border-radius:50px;
-        display:inline-block;
-        transition:.3s;
-        font-weight:600;
-    }
-
-    .btn:hover{
-        transform:translateY(-3px);
-        background:var(--green-light);
-    }
-
-    .hero-image{
-        text-align:center;
-    }
-
-    .hero-image img{
-        width:350px;
-        max-width:100%;
-        filter:drop-shadow(0 0 30px rgba(87,182,31,.7));
-    }
-
-    /* SECCIONES */
-
-    section{
-        padding:60px 0;
-    }
-
-    .section-title{
-        text-align:center;
-        margin-bottom:50px;
-        font-size:2.5rem;
-    }
-
-    .section-title span{
-        color:var(--green);
-    }
-        
-    /* FUNDADORES */
-
-    .founders-section{
-        background:#111111;
-    }
-
-    .founders-carousel{
-        position:relative;
-        max-width:1000px;
-        margin:auto;
-        overflow:hidden;
-    }
-
-    .founders-track{
-        display:flex;
-        transition:transform .5s ease;
-    }
-
-    .founder-card{
-        min-width:100%;
-        background:#171717;
-        border-radius:20px;
-        padding:40px;
-        text-align:center;
-    }
-
-    .founder-card img{
-        width:180px;
-        height:180px;
-        border-radius:50%;
-        object-fit:cover;
-        border:4px solid #57B61F;
-        margin-bottom:20px;
-    }
-
-    .founder-card h3{
-        color:#57B61F;
-        margin-bottom:10px;
-        font-size:1.8rem;
-    }
-
-    .founder-card h4{
-        color:#ccc;
-        margin-bottom:20px;
-        font-weight:400;
-    }
-
-    .founder-card p{
-        max-width:700px;
-        margin:auto;
-        line-height:1.8;
-        color:#ddd;
-    }
-
-    .carousel-buttons{
-        display:flex;
-        justify-content:center;
-        gap:20px;
-        margin-top:25px;
-    }
-
-    .carousel-buttons button{
-        width:50px;
-        height:50px;
-        border:none;
-        border-radius:50%;
-        background:#57B61F;
-        color:white;
-        font-size:22px;
-        cursor:pointer;
-        transition:.3s;
-    }
-
-    .carousel-buttons button:hover{
-        transform:scale(1.1);
-    }
-    /* ============================= */
-    /* MURO EMBEBIDO DE TESTIMONIOS  */
-    /* ============================= */
-
-    .testimonios-embed-section{
-        background:#0e0e0e;
-    }
-
-    .embed-header{
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        flex-wrap:wrap;
-        gap:16px;
-        margin-bottom:28px;
-    }
-
-    .embed-eyebrow{
-        display:inline-flex;
-        align-items:center;
-        gap:8px;
-        color:var(--green);
-        font-size:.75rem;
-        letter-spacing:.16em;
-        text-transform:uppercase;
-        font-weight:600;
-    }
-
-    .embed-eyebrow::before{
-        content:"";
-        width:7px;
-        height:7px;
-        border-radius:50%;
-        background:var(--green);
-        box-shadow:0 0 10px var(--green);
-    }
-
-    .embed-link{
-        color:var(--green);
-        text-decoration:none;
-        font-size:.85rem;
-        font-weight:500;
-        display:flex;
-        align-items:center;
-        gap:6px;
-        transition:.25s;
-    }
-
-    .embed-link:hover{ color:var(--green-light); }
-
-    .embed-filters{
-        display:flex;
-        gap:10px;
-        flex-wrap:wrap;
-        margin-bottom:20px;
-    }
-
-    .e-pill{
-        border:1px solid #2a2a2a;
-        background:#141414;
-        color:#ccc;
-        padding:8px 18px;
-        border-radius:50px;
-        font-size:.82rem;
-        cursor:pointer;
-        transition:.25s;
-        font-weight:500;
-        font-family:'Poppins',sans-serif;
-    }
-
-    .e-pill:hover{ border-color:var(--green); color:white; }
-    .e-pill.active{ background:var(--green); border-color:var(--green); color:white; }
-
-    .embed-scroll-wrapper{ position:relative; }
-
-    .embed-scroll{
-        height:520px;
-        overflow-y:auto;
-        padding-right:6px;
-        scroll-behavior:smooth;
-        scrollbar-width:thin;
-        scrollbar-color:var(--green) #1a1a1a;
-    }
-
-    .embed-scroll::-webkit-scrollbar{ width:5px; }
-    .embed-scroll::-webkit-scrollbar-track{ background:#1a1a1a; border-radius:10px; }
-    .embed-scroll::-webkit-scrollbar-thumb{ background:var(--green); border-radius:10px; }
-
-    .embed-scroll-wrapper::before,
-    .embed-scroll-wrapper::after{
-        content:"";
-        position:absolute;
-        left:0; right:12px;
-        height:40px;
-        pointer-events:none;
-        z-index:2;
-    }
-
-    .embed-scroll-wrapper::before{
-        top:0;
-        background:linear-gradient(to bottom, #0e0e0e, transparent);
-    }
-
-    .embed-scroll-wrapper::after{
-        bottom:0;
-        background:linear-gradient(to top, #0e0e0e, transparent);
-    }
-
-    .embed-wall-grid{
-        columns:3 220px;
-        column-gap:18px;
-    }
-
-    @media(max-width:1000px){ .embed-wall-grid{ columns:2 220px; } }
-    @media(max-width:580px){ .embed-wall-grid{ columns:1; } .embed-scroll{ height:420px; } }
-
-    .t-card{
-        break-inside:avoid;
-        margin-bottom:18px;
-        background:var(--card);
-        border:1px solid #232323;
-        border-radius:16px;
-        padding:22px;
-        position:relative;
-        transition:.3s;
-    }
-
-    .t-card:hover{
-        transform:translateY(-3px);
-        border-color:var(--green);
-        box-shadow:0 10px 28px rgba(0,0,0,.45);
-    }
-
-    .t-quote-mark{
-        font-family:'Fraunces',serif;
-        font-size:2.4rem;
-        color:var(--green);
-        line-height:1;
-        opacity:.45;
-        margin-bottom:4px;
-        display:block;
-    }
-
-    .t-text{
-        color:#e4e4e4;
-        line-height:1.65;
-        font-size:.9rem;
-        margin-bottom:18px;
-    }
-
-    .t-footer{ display:flex; align-items:center; gap:12px; }
-
-    .t-avatar{
-        width:42px;
-        height:42px;
-        border-radius:50%;
-        object-fit:cover;
-        border:2px solid var(--green);
-        flex-shrink:0;
-    }
-
-    .t-name{ color:white; font-weight:600; font-size:.88rem; }
-    .t-role{ color:#888; font-size:.74rem; }
-
-    .t-badge{
-        position:absolute;
-        top:20px; right:20px;
-        color:var(--green);
-        font-size:.9rem;
-    }
-
-    /* STATS */
-
-    .stats-grid{
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-        gap:25px;
-    }
-
-    .card{
-        background:var(--card);
-        border-radius:20px;
-        padding:35px;
-        text-align:center;
-        transition:.3s;
-    }
-
-    .card:hover{
-        transform:translateY(-8px);
-        border:1px solid var(--green);
-    }
-
-    .card h3{
-        color:var(--green);
-        font-size:2rem;
-    }
-
-    .card p{
-        color:#ccc;
-        margin-top:10px;
-    }
-
-    /* ABOUT */
-
-    .about-grid{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:30px;
-    }
-
-    .about-box{
-        background:var(--card);
-        padding:40px;
-        border-radius:20px;
-    }
-
-    .about-box h3{
-        color:var(--green);
-        margin-bottom:15px;
-    }
-
-    /* CHART */
-
-    .chart-box{
-        background:var(--card);
-        padding:30px;
-        border-radius:20px;
-    }
-    #cryptoChart{
-        max-height:300px;
-    }
-    .youtube{
-        background:#FF0000;
-    }
-    /* CONTACTO */
-
-    .contact-container{
-        display:grid;
-        grid-template-columns:1fr 1.5fr;
-        gap:30px;
-    }
-
-    .contact-info{
-        background:var(--card);
-        padding:40px;
-        border-radius:20px;
-    }
-
-    .contact-info h3{
-        color:var(--green);
-        margin-bottom:20px;
-    }
-
-    .contact-form{
-        background:var(--card);
-        padding:20px;
-        border-radius:20px;
-    }
-
-    .contact-form iframe{
-        border-radius:15px;
-        background:white;
-    }
-
-    /* SOCIAL */
-
-    .social-links{
-        margin-top:30px;
-        display:flex;
-        gap:15px;
-        flex-wrap:wrap;
-    }
-
-    .social-btn{
-        text-decoration:none;
-        color:white;
-        padding:15px 25px;
-        border-radius:12px;
-        font-weight:600;
-        display:flex;
-        align-items:center;
-        gap:10px;
-    }
-
-    .whatsapp{
-        background:#25D366;
-    }
-
-    .discord{
-        background:#5865F2;
-    }
-
-    /* FOOTER */
-
-    footer{
-        padding:40px;
-        text-align:center;
-        border-top:1px solid #222;
-    }
-
-    footer p{
-        color:#888;
-    }
-
-    /* BOTONES FLOTANTES */
-
-    .floating-whatsapp,
-    .floating-discord{
-
-        position:fixed;
-        right:25px;
-        width:60px;
-        height:60px;
-        border-radius:50%;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        color:white;
-        text-decoration:none;
-        font-size:28px;
-        z-index:9999;
-        box-shadow:0 0 20px rgba(0,0,0,.4);
-    }
-
-    .floating-whatsapp{
-        background:#25D366;
-        bottom:20px;
-    }
-
-    .floating-discord{
-        background:#5865F2;
-        bottom:95px;
-    }
-
-    /* RESPONSIVE */
-
-    @media(max-width:900px){
-
-    .hero-content,
-    .about-grid,
-    .contact-container{
-        grid-template-columns:1fr;
-    }
-
-    .hero{
-        padding-top:100px;
-    }
-
-    .hero h1{
-        font-size:2.7rem;
-        text-align:center;
-    }
-
-    .hero p,
-    .hero-image,
-    .hero-content div{
-        text-align:center;
-    }
-
-    .menu-toggle{
-        display:block;
-    }
-    
-    nav{
-        display:none;
-        position:fixed;
-        top:95px;
-        left:0;
-        width:100%;
-        background:rgba(0,0,0,.97);
-        backdrop-filter:blur(10px);
-        border-top:1px solid #222;
-    }
-    
-    nav.active{
-        display:block;
-    }
-    
-    nav ul{
-        flex-direction:column;
-        align-items:center;
-        gap:0;
-        padding:10px 0;
-    }
-    
-    nav ul li{
-        width:100%;
-        text-align:center;
-    }
-    
-    nav ul li a{
-        display:block;
-        padding:15px 0;
-    }
-
-    }
-
-    </style>
-    </head>
-
-    <body>
-
-    <header>
-
-    <div class="container navbar">
-
-    <div class="logo">
-    <img src="chi_logo.png" alt="ᚲᚺᛁ ">
-    <h2>ᚲᚺᛁ </h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1P98J72FX4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1P98J72FX4');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ᚲᚺᛁ | Nuestra comunidad, nuestra moneda</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+:root{
+    --green:#57B61F;
+    --green-light:#6dd629;
+    --black:#0B0B0B;
+    --dark:#111111;
+    --card:#171717;
+    --white:#ffffff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--black);
+    color:white;
+}
+
+/* HEADER */
+
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+    background:rgba(0,0,0,.90);
+    backdrop-filter:blur(10px);
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 0;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo img{
+    width:55px;
+}
+
+.logo h2{
+    color:var(--green);
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--green);
+}
+
+nav a.active{
+    color:var(--green);
+}
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    color:white;
+    font-size:26px;
+    cursor:pointer;
+    padding:5px 10px;
+}
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    background:
+    radial-gradient(circle at center,
+    rgba(87,182,31,.20),
+    transparent 50%);
+}
+
+.hero-content{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.hero h1{
+    font-size:4rem;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:var(--green);
+}
+
+.hero p{
+    color:#cfcfcf;
+    margin-bottom:30px;
+}
+
+.btn{
+    background:var(--green);
+    color:white;
+    text-decoration:none;
+    padding:15px 35px;
+    border-radius:50px;
+    display:inline-block;
+    transition:.3s;
+    font-weight:600;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    background:var(--green-light);
+}
+
+.hero-image{
+    text-align:center;
+}
+
+.hero-image img{
+    width:350px;
+    max-width:100%;
+    filter:drop-shadow(0 0 30px rgba(87,182,31,.7));
+}
+
+/* SECCIONES */
+
+section{
+    padding:60px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+    font-size:2.5rem;
+}
+
+.section-title span{
+    color:var(--green);
+}
+
+/* FUNDADORES */
+
+.founders-section{
+    background:#111111;
+}
+
+.founders-carousel{
+    position:relative;
+    max-width:1000px;
+    margin:auto;
+    overflow:hidden;
+}
+
+.founders-track{
+    display:flex;
+    transition:transform .5s ease;
+}
+
+.founder-card{
+    min-width:100%;
+    background:#171717;
+    border-radius:20px;
+    padding:40px;
+    text-align:center;
+}
+
+.founder-card img{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #57B61F;
+    margin-bottom:20px;
+}
+
+.founder-card h3{
+    color:#57B61F;
+    margin-bottom:10px;
+    font-size:1.8rem;
+}
+
+.founder-card h4{
+    color:#ccc;
+    margin-bottom:20px;
+    font-weight:400;
+}
+
+.founder-card p{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    color:#ddd;
+}
+
+.carousel-buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:25px;
+}
+
+.carousel-buttons button{
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:50%;
+    background:#57B61F;
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.carousel-buttons button:hover{
+    transform:scale(1.1);
+}
+/* ============================= */
+/* MURO EMBEBIDO DE TESTIMONIOS  */
+/* ============================= */
+
+.testimonios-embed-section{
+    background:#0e0e0e;
+}
+
+.embed-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-bottom:28px;
+}
+
+.embed-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--green);
+    font-size:.75rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    font-weight:600;
+}
+
+.embed-eyebrow::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 10px var(--green);
+}
+
+.embed-link{
+    color:var(--green);
+    text-decoration:none;
+    font-size:.85rem;
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    transition:.25s;
+}
+
+.embed-link:hover{ color:var(--green-light); }
+
+.embed-filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.e-pill{
+    border:1px solid #2a2a2a;
+    background:#141414;
+    color:#ccc;
+    padding:8px 18px;
+    border-radius:50px;
+    font-size:.82rem;
+    cursor:pointer;
+    transition:.25s;
+    font-weight:500;
+    font-family:'Poppins',sans-serif;
+}
+
+.e-pill:hover{ border-color:var(--green); color:white; }
+.e-pill.active{ background:var(--green); border-color:var(--green); color:white; }
+
+.embed-scroll-wrapper{ position:relative; }
+
+.embed-scroll{
+    height:520px;
+    overflow-y:auto;
+    padding-right:6px;
+    scroll-behavior:smooth;
+    scrollbar-width:thin;
+    scrollbar-color:var(--green) #1a1a1a;
+}
+
+.embed-scroll::-webkit-scrollbar{ width:5px; }
+.embed-scroll::-webkit-scrollbar-track{ background:#1a1a1a; border-radius:10px; }
+.embed-scroll::-webkit-scrollbar-thumb{ background:var(--green); border-radius:10px; }
+
+.embed-scroll-wrapper::before,
+.embed-scroll-wrapper::after{
+    content:"";
+    position:absolute;
+    left:0; right:12px;
+    height:40px;
+    pointer-events:none;
+    z-index:2;
+}
+
+.embed-scroll-wrapper::before{
+    top:0;
+    background:linear-gradient(to bottom, #0e0e0e, transparent);
+}
+
+.embed-scroll-wrapper::after{
+    bottom:0;
+    background:linear-gradient(to top, #0e0e0e, transparent);
+}
+
+.embed-wall-grid{
+    columns:3 220px;
+    column-gap:18px;
+}
+
+@media(max-width:1000px){ .embed-wall-grid{ columns:2 220px; } }
+@media(max-width:580px){ .embed-wall-grid{ columns:1; } .embed-scroll{ height:420px; } }
+
+.t-card{
+    break-inside:avoid;
+    margin-bottom:18px;
+    background:var(--card);
+    border:1px solid #232323;
+    border-radius:16px;
+    padding:22px;
+    position:relative;
+    transition:.3s;
+}
+
+.t-card:hover{
+    transform:translateY(-3px);
+    border-color:var(--green);
+    box-shadow:0 10px 28px rgba(0,0,0,.45);
+}
+
+.t-quote-mark{
+    font-family:'Fraunces',serif;
+    font-size:2.4rem;
+    color:var(--green);
+    line-height:1;
+    opacity:.45;
+    margin-bottom:4px;
+    display:block;
+}
+
+.t-text{
+    color:#e4e4e4;
+    line-height:1.65;
+    font-size:.9rem;
+    margin-bottom:18px;
+}
+
+.t-footer{ display:flex; align-items:center; gap:12px; }
+
+.t-avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid var(--green);
+    flex-shrink:0;
+}
+
+.t-name{ color:white; font-weight:600; font-size:.88rem; }
+.t-role{ color:#888; font-size:.74rem; }
+
+.t-badge{
+    position:absolute;
+    top:20px; right:20px;
+    color:var(--green);
+    font-size:.9rem;
+}
+
+/* STATS */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:var(--card);
+    border-radius:20px;
+    padding:35px;
+    text-align:center;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border:1px solid var(--green);
+}
+
+.card h3{
+    color:var(--green);
+    font-size:2rem;
+}
+
+.card p{
+    color:#ccc;
+    margin-top:10px;
+}
+
+/* ABOUT */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+}
+
+.about-box{
+    background:var(--card);
+    padding:40px;
+    border-radius:20px;
+}
+
+.about-box h3{
+    color:var(--green);
+    margin-bottom:15px;
+}
+
+/* CHART */
+
+.chart-box{
+    background:var(--card);
+    padding:30px;
+    border-radius:20px;
+}
+#cryptoChart{
+    max-height:300px;
+}
+.youtube{
+    background:#FF0000;
+}
+/* CONTACTO */
+
+.contact-container{
+    display:grid;
+    grid-template-columns:1fr 1.5fr;
+    gap:30px;
+}
+
+.contact-info{
+    background:var(--card);
+    padding:40px;
+    border-radius:20px;
+}
+
+.contact-info h3{
+    color:var(--green);
+    margin-bottom:20px;
+}
+
+.contact-form{
+    background:var(--card);
+    padding:20px;
+    border-radius:20px;
+}
+
+.contact-form iframe{
+    border-radius:15px;
+    background:white;
+}
+
+/* SOCIAL */
+
+.social-links{
+    margin-top:30px;
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.social-btn{
+    text-decoration:none;
+    color:white;
+    padding:15px 25px;
+    border-radius:12px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.whatsapp{
+    background:#25D366;
+}
+
+.discord{
+    background:#5865F2;
+}
+
+/* FOOTER */
+
+footer{
+    padding:40px;
+    text-align:center;
+    border-top:1px solid #222;
+}
+
+footer p{
+    color:#888;
+}
+
+/* BOTONES FLOTANTES */
+
+.floating-whatsapp,
+.floating-discord{
+
+    position:fixed;
+    right:25px;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    text-decoration:none;
+    font-size:28px;
+    z-index:9999;
+    box-shadow:0 0 20px rgba(0,0,0,.4);
+}
+
+.floating-whatsapp{
+    background:#25D366;
+    bottom:20px;
+}
+
+.floating-discord{
+    background:#5865F2;
+    bottom:95px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.hero-content,
+.about-grid,
+.contact-container{
+    grid-template-columns:1fr;
+}
+
+.hero{
+    padding-top:100px;
+}
+
+.hero h1{
+    font-size:2.7rem;
+    text-align:center;
+}
+
+.hero p,
+.hero-image,
+.hero-content div{
+    text-align:center;
+}
+
+.menu-toggle{
+    display:block;
+}
+
+nav{
+    display:none;
+    position:fixed;
+    top:95px;
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,.97);
+    backdrop-filter:blur(10px);
+    border-top:1px solid #222;
+}
+
+nav.active{
+    display:block;
+}
+
+nav ul{
+    flex-direction:column;
+    align-items:center;
+    gap:0;
+    padding:10px 0;
+}
+
+nav ul li{
+    width:100%;
+    text-align:center;
+}
+
+nav ul li a{
+    display:block;
+    padding:15px 0;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="container navbar">
+
+<div class="logo">
+<img src="chi_logo.png" alt="ᚲᚺᛁ ">
+<h2>ᚲᚺᛁ </h2>
+</div>
+
+<nav id="mainNav">
+<ul>
+<li><a href="#"><i class="fa-solid fa-house"></i></a></li>
+<li><a href="#about">Quiénes Somos</a></li>
+<li><a href="#goal">Objetivo</a></li>
+<li><a href="#market">Valor de ᚲᚺᛁ</a></li>
+<li><a href="cifras.html">Cifras</a></li>
+<li><a href="testimonios.html">Testimonios</a></li>
+<li><a href="comercios.html">Mercado</a></li>
+<li><a href="#contacto">Contacto</a></li>
+</ul>
+
+</nav>
+<button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+    <i class="fa-solid fa-bars"></i>
+</button>
+</div>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="container hero-content">
+
+<div>
+
+<h1>Nuestra comunidad, nuestra moneda <span> ᚲᚺᛁ </span></h1>
+
+<p>
+Un proyecto diseñado para impulsar el comercio, 
+la comunidad y la libertad financiera de nuestros miembros.
+</p>
+
+<a href="#contacto" class="btn">
+Únete Ahora
+</a>
+
+</div>
+
+<div class="hero-image">
+<img src="chi_logo.png" alt="ᚲᚺᛁ ">
+</div>
+
+</div>
+
+</section>
+
+<!-- MURO DE TESTIMONIOS EMBEBIDO -->
+<section class="testimonios-embed-section">
+<div class="container">
+
+    <div class="embed-header">
+        <div>
+            <span class="embed-eyebrow">Voces de la comunidad</span>
+            <h2 class="section-title" style="text-align:left;margin-bottom:0;margin-top:10px;font-size:2rem;">
+                Lo que dice nuestra <span>comunidad</span>
+            </h2>
+        </div>
+        <a href="testimonios.html" class="embed-link">
+            Ver todos los testimonios <i class="fa-solid fa-arrow-right"></i>
+        </a>
     </div>
 
-    <nav id="mainNav">
-    <ul>
-    <li><a href="#"><i class="fa-solid fa-house"></i></a></li>
-    <li><a href="#about">Quiénes Somos</a></li>
-    <li><a href="#goal">Objetivo</a></li>
-    <li><a href="#market">Valor de ᚲᚺᛁ</a></li>
-    <li><a href="cifras.html">Cifras</a></li>
-    <li><a href="testimonios.html">Testimonios</a></li>
-    <li><a href="comercios.html">Mercado</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-    </ul>
-    
-    </nav>
-    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
-        <i class="fa-solid fa-bars"></i>
-    </button>
+    <div class="embed-scroll-wrapper">
+    <div class="embed-scroll">
+    <div class="embed-wall-grid">
+
+        <!-- DESTACADO 1 -->
+    <div class="t-card featured">
+        <div class="t-inner">
+            <span class="t-quote-mark">"</span>
+            <p class="t-text">
+            En el Proyecto ᚲᚺᛁ todos trabajamos por todos, todos competimos con todos y las reglas son iguales para todos. 
+            Es el juego social perfecto, sin igualdad pero con justicia, de horizonte infinito, en el que todos ganamos.
+            </p>
+            <div class="t-footer">
+                <div>
+                    <div class="t-name">Sapiens Immortal</div>
+                    <div class="t-role">CEO & Co-Founder · Blockchain</div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    </header>
-
-    <!-- HERO -->
-
-    <section class="hero">
-
-    <div class="container hero-content">
-
-    <div>
-
-    <h1>Nuestra comunidad, nuestra moneda <span> ᚲᚺᛁ </span></h1>
-
-    <p>
-    Un proyecto diseñado para impulsar el comercio, 
-    la comunidad y la libertad financiera de nuestros miembros.
-    </p>
-
-    <a href="#contacto" class="btn">
-    Únete Ahora
-    </a>
-
-    </div>
-
-    <div class="hero-image">
-    <img src="chi_logo.png" alt="ᚲᚺᛁ ">
-    </div>
-
-    </div>
-
-    </section>
-
-    <!-- MURO DE TESTIMONIOS EMBEBIDO -->
-    <section class="testimonios-embed-section">
-    <div class="container">
-
-        <div class="embed-header">
+    <!-- 2 -->
+    <div class="t-card">
+        <i class="fa-solid fa-circle-check t-badge"></i>
+        <span class="t-quote-mark">"uso responsable de las plantas medicinales"</span>
+        <p class="t-text">
+        Mi propósito es promover el acceso al conocimiento, la innovación agrícola y el uso responsable de las plantas medicinales 
+        como herramientas de bienestar y transformación social. A través de The Root desarrollo tecnologías de cultivo sostenible,
+        sistemas hidropónicos y proyectos de educación comunitaria que integran saberes ancestrales, investigación aplicada y 
+        desarrollo tecnológico. Además, mi trayectoria de más de 26 años en procesos artísticos y culturales me ha permitido impulsar espacios de colaboración donde la ciencia, el arte, la naturaleza y la comunidad trabajan juntas para generar impacto positivo y construir un futuro más consciente y sostenible.
+        </p>
+        <div class="t-footer">
             <div>
-                <span class="embed-eyebrow">Voces de la comunidad</span>
-                <h2 class="section-title" style="text-align:left;margin-bottom:0;margin-top:10px;font-size:2rem;">
-                    Lo que dice nuestra <span>comunidad</span>
-                </h2>
-            </div>
-            <a href="testimonios.html" class="embed-link">
-                Ver todos los testimonios <i class="fa-solid fa-arrow-right"></i>
-            </a>
-        </div>
-
-        <div class="embed-scroll-wrapper">
-        <div class="embed-scroll">
-        <div class="embed-wall-grid">
-
-            <!-- DESTACADO 1 -->
-        <div class="t-card featured">
-            <div class="t-inner">
-                <span class="t-quote-mark">"</span>
-                <p class="t-text">
-                En el Proyecto ᚲᚺᛁ todos trabajamos por todos, todos competimos con todos y las reglas son iguales para todos. 
-                Es el juego social perfecto, sin igualdad pero con justicia, de horizonte infinito, en el que todos ganamos.
-                </p>
-                <div class="t-footer">
-                    <div>
-                        <div class="t-name">Sapiens Immortal</div>
-                        <div class="t-role">CEO & Co-Founder · Blockchain</div>
-                    </div>
-                </div>
+                <div class="t-name">John Alexander López Mantilla</div>
+                <div class="t-role">Comerciante vinculado - fundador y CEO de The Root Grow Shop</div>
             </div>
         </div>
+    </div>
 
-        <!-- 2 -->
-        <div class="t-card">
-            <i class="fa-solid fa-circle-check t-badge"></i>
-            <span class="t-quote-mark">"uso responsable de las plantas medicinales"</span>
-            <p class="t-text">
-            Mi propósito es promover el acceso al conocimiento, la innovación agrícola y el uso responsable de las plantas medicinales 
-            como herramientas de bienestar y transformación social. A través de The Root desarrollo tecnologías de cultivo sostenible,
-            sistemas hidropónicos y proyectos de educación comunitaria que integran saberes ancestrales, investigación aplicada y 
-            desarrollo tecnológico. Además, mi trayectoria de más de 26 años en procesos artísticos y culturales me ha permitido impulsar espacios de colaboración donde la ciencia, el arte, la naturaleza y la comunidad trabajan juntas para generar impacto positivo y construir un futuro más consciente y sostenible.
-            </p>
-            <div class="t-footer">
-                <div>
-                    <div class="t-name">John Alexander López Mantilla</div>
-                    <div class="t-role">Comerciante vinculado - fundador y CEO de The Root Grow Shop</div>
-                </div>
+    <!-- 3 -->
+    <div class="t-card">
+        <span class="t-quote-mark">"</span>
+        <p class="t-text">
+        Lo que más valoro es la transparencia. Puedo ver el crecimiento
+        de la moneda y entender hacia dónde va el proyecto.
+        </p>
+        <div class="t-footer">
+            <div>
+                <div class="t-name">Jhon Espinosa</div>
+                <div class="t-role">Especialista en setas medicinales</div>
             </div>
         </div>
+    </div>
 
-        <!-- 3 -->
-        <div class="t-card">
-            <span class="t-quote-mark">"</span>
-            <p class="t-text">
-            Lo que más valoro es la transparencia. Puedo ver el crecimiento
-            de la moneda y entender hacia dónde va el proyecto.
-            </p>
-            <div class="t-footer">
-                <div>
-                    <div class="t-name">Jhon Espinosa</div>
-                    <div class="t-role">Especialista en setas medicinales</div>
-                </div>
+    <!-- 4 -->
+    <div class="t-card">
+        <i class="fa-solid fa-circle-check t-badge"></i>
+        <span class="t-quote-mark">"</span>
+        <p class="t-text">
+        Grabar el contenido del proyecto me hizo entender el alcance
+        real de ᚲᚺᛁ: no es solo una moneda, es una red de personas
+        que se respaldan entre sí.
+        </p>
+        <div class="t-footer">
+            <div>
+                <div class="t-name">Juanpi Man</div>
+                <div class="t-role">Especialista en video</div>
             </div>
         </div>
+    </div>
 
-        <!-- 4 -->
-        <div class="t-card">
-            <i class="fa-solid fa-circle-check t-badge"></i>
-            <span class="t-quote-mark">"</span>
-            <p class="t-text">
-            Grabar el contenido del proyecto me hizo entender el alcance
-            real de ᚲᚺᛁ: no es solo una moneda, es una red de personas
-            que se respaldan entre sí.
-            </p>
-            <div class="t-footer">
-                <div>
-                    <div class="t-name">Juanpi Man</div>
-                    <div class="t-role">Especialista en video</div>
-                </div>
+    <!-- 5 -->
+    <div class="t-card">
+        <span class="t-quote-mark">"</span>
+        <p class="t-text">
+        Unirme a ᚲᚺᛁ fue una forma natural de extender mi trabajo con
+        alimentos de origen vegetal hacia una comunidad que piensa
+        igual que yo: en sistemas sostenibles.
+        </p>
+        <div class="t-footer">
+            <div>
+                <div class="t-name">Juan Vioplanet</div>
+                <div class="t-role">Especialista en alimentos de plantas</div>
             </div>
         </div>
+    </div>
 
-        <!-- 5 -->
-        <div class="t-card">
-            <span class="t-quote-mark">"</span>
-            <p class="t-text">
-            Unirme a ᚲᚺᛁ fue una forma natural de extender mi trabajo con
-            alimentos de origen vegetal hacia una comunidad que piensa
-            igual que yo: en sistemas sostenibles.
-            </p>
-            <div class="t-footer">
-                <div>
-                    <div class="t-name">Juan Vioplanet</div>
-                    <div class="t-role">Especialista en alimentos de plantas</div>
-                </div>
+    <!-- 6 -->
+    <div class="t-card">
+        <i class="fa-solid fa-circle-check t-badge"></i>
+        <span class="t-quote-mark">Tecnologias Colombianas"</span>
+        <p class="t-text">
+        Considero que el estudio de las tecnologías emergentes y el aprendizaje autónomo son pilares fundamentales 
+        del conocimiento y del crecimiento personal. Me motiva formar parte de un proyecto que apuesta por tecnologías 
+        modernas e innovadoras, mientras construye una comunidad con un propósito claro: impulsar la libertad financiera, 
+        fomentar una economía circular y reunir personas con valores y objetivos similares,
+        comprometidas con el aprendizaje, la colaboración y el desarrollo colectivo.
+        </p>
+        <div class="t-footer">
+            <div>
+                <div class="t-name">Felipe Bohòrquez</div>
+                <div class="t-role">Especialista en datos y co-fundador de Alma de Colores </div>
             </div>
         </div>
-
-        <!-- 6 -->
-        <div class="t-card">
-            <i class="fa-solid fa-circle-check t-badge"></i>
-            <span class="t-quote-mark">Tecnologias Colombianas"</span>
-            <p class="t-text">
-            Considero que el estudio de las tecnologías emergentes y el aprendizaje autónomo son pilares fundamentales 
-            del conocimiento y del crecimiento personal. Me motiva formar parte de un proyecto que apuesta por tecnologías 
-            modernas e innovadoras, mientras construye una comunidad con un propósito claro: impulsar la libertad financiera, 
-            fomentar una economía circular y reunir personas con valores y objetivos similares,
-            comprometidas con el aprendizaje, la colaboración y el desarrollo colectivo.
-            </p>
-            <div class="t-footer">
-                <div>
-                    <div class="t-name">Felipe Bohòrquez</div>
-                    <div class="t-role">Especialista en datos y co-fundador de Alma de Colores </div>
-                </div>
-            </div>
-        </div>
-
-        </div>
-        </div>
-        </div>
+    </div>
 
     </div>
-    </section>
+    </div>
+    </div>
 
-    <!-- STATS -->
+</div>
+</section>
 
-    <section id="market">
+<!-- STATS -->
 
-        <div class="container">
-
-        <h2 class="section-title">
-        Datos de la <span>Moneda</span>
-        </h2>
-
-        <div class="stats-grid">
-
-        <div class="card">
-        <h3 id="valorActual">$0.00</h3>
-        <p>Valor Actual(COP)</p>
-        </div>
-
-        <div class="card">
-        <h3>11</h3>
-        <p>Comerciantes vinculados</p>
-        </div>
-
-        <div class="card">
-        <h3 id="crecimientoSemanal">0%</h3>
-        <p>Crecimiento Semanal</p>
-        </div>
-
-        </div>
-
-        <!-- GRAFICA -->
-
-        <section >
-        <div class="container">
-        <div class="chart-box">
-        <canvas id="cryptoChart"></canvas>
-
-        </div>
-
-        </div>
-
-        </section>
-
-    </section>
-
-
-    <!-- QUIENES SOMOS -->
-
-    <section id="about">
+<section id="market">
 
     <div class="container">
 
     <h2 class="section-title">
-    Quiénes <span>Somos</span>
+    Datos de la <span>Moneda</span>
     </h2>
 
-    <div class="about-grid">
+    <div class="stats-grid">
 
-    <div class="about-box">
-    <h3>Nuestra Historia</h3>
-    <p>
-    ᚲᚺᛁ  nace con la misión de democratizar el acceso a
-    las finanzas digitales mediante tecnología blockchain.
-    </p>
-    </div>
-
-    <div class="about-box">
-    <h3>Nuestra Comunidad</h3>
-    <p>
-    Miles de usuarios participan activamente impulsando el
-    crecimiento del ecosistema.
-    </p>
-    </div>
-
-    </div>
-
-    </div>
-
-    </section>
-
-    <!-- OBJETIVO -->
-
-    <section id="goal">
-
-    <div class="container">
-
-    <h2 class="section-title">
-    Nuestro <span>Objetivo</span>
-    </h2>
-
-    <div class="about-box">
-
-    <p>
-    Crear una economía descentralizada donde cualquier persona
-    pueda acceder a herramientas financieras seguras, rápidas
-    y transparentes.
-    </p>
-
-    </div>
-
-    </div>
-
-    </section>
-
-        
-    <!-- FUNDADORES -->
-    <section class="founders-section" id="founders">
-
-    <div class="container">
-
-        
-    <!-- CONTACTO -->
-
-    <section id="contacto">
-        <div class="container">
-            <h2 class="section-title">Contácta<span>nos</span></h2>
-
-        <div class="contact-container">
-            <div class="contact-info">
-                <h3>Únete a la Comunidad</h3>
-                <div class="social-links">
-                    <a 
-                        href="https://chat.whatsapp.com/Fydwr7LSnOwJTIW73ylV4q?s=sw&p=i&mlu=4"
-                        class="social-btn whatsapp"
-                        target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                        WhatsApp
-                    </a>
-                </div>
-            </div>
-            <div class="contact-info">
-                <h3>Nuestra experiencia</h3>
-                <div class="social-links">
-                    <a 
-                        href="https://www.youtube.com/shorts/19U2HQQGLxk"
-                        class="social-btn youtube"
-                        target="_blank">
-                        <i class="fab fa-youtube"></i>
-                        YouTube
-                    </a>
-                </div>
-            </div>
-
+        <div class="card">
+            <h3 id="valorActual">$0.00</h3>
+            <p>Valor Actual (COP)</p>
         </div>
+
+        <div class="card">
+            <h3 id="crecimientoSemanal">0%</h3>
+            <p>Crecimiento Semanal</p>
+        </div>
+
+        <div class="card">
+            <h3 id="miembrosUnicos">—</h3>
+            <p>Miembros únicos</p>
+        </div>
+
+        <div class="card">
+            <h3 id="comerciosVinculados">—</h3>
+            <p>Comerciantes vinculados</p>
+        </div>
+
     </div>
+
+    <!-- GRAFICA -->
+
+    <section >
+    <div class="container">
+    <div class="chart-box">
+    <canvas id="cryptoChart"></canvas>
+
+    </div>
+
+    </div>
+
     </section>
 
-    <footer>
-        <p>© 2026 Proyecto ᚲᚺᛁ. Todos los derechos reservados.</p>
-    </footer>
+    <!-- VER MÁS -->
 
-    <!-- BOTONES FLOTANTES -->
-    <a 
-        href="https://chat.whatsapp.com/Fydwr7LSnOwJTIW73ylV4q?s=sw&p=i&mlu=4"
-        class="floating-whatsapp"
-        target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <div style="text-align:center;margin-top:30px;">
+        <a href="cifras.html" class="btn">Ver más</a>
+    </div>
 
-        <script>
-        fetch('chi-data.json')
-            .then(response => response.json())
-            .then(data => {
-                const labels = data.labels;
-                const valores = data.valores;
-        
-                // --- Calcular Valor Actual y Crecimiento Semanal ---
-                const valorActual = valores[valores.length - 1];
-                const valorAnterior = valores[valores.length - 2];
-                const crecimiento = ((valorActual - valorAnterior) / valorAnterior) * 100;
-        
-                document.getElementById('valorActual').textContent = '$' + valorActual.toFixed(2);
-                document.getElementById('crecimientoSemanal').textContent =
-                    (crecimiento >= 0 ? '+' : '') + crecimiento.toFixed(2) + '%';
-        
-                // Opcional: si el crecimiento es negativo, pinta la tarjeta en rojo en vez de verde
-                const cardCrecimiento = document.getElementById('crecimientoSemanal');
-                cardCrecimiento.style.color = crecimiento >= 0 ? '#57B61F' : '#e74c3c';
-        
-                // --- Gráfico ---
-                const ctx = document.getElementById('cryptoChart');
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Valor ᚲᚺᛁ ',
-                            data: valores,
-                            borderColor:'#57B61F',
-                            backgroundColor:'rgba(87,182,31,.2)',
-                            fill:true,
-                            tension:0.4
-                        }]
+    </div>
+
+</section>
+
+
+<!-- QUIENES SOMOS -->
+
+<section id="about">
+
+<div class="container">
+
+<h2 class="section-title">
+Quiénes <span>Somos</span>
+</h2>
+
+<div class="about-grid">
+
+<div class="about-box">
+<h3>Nuestra Historia</h3>
+<p>
+ᚲᚺᛁ  nace con la misión de democratizar el acceso a
+las finanzas digitales mediante tecnología blockchain.
+</p>
+</div>
+
+<div class="about-box">
+<h3>Nuestra Comunidad</h3>
+<p>
+Miles de usuarios participan activamente impulsando el
+crecimiento del ecosistema.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- OBJETIVO -->
+
+<section id="goal">
+
+<div class="container">
+
+<h2 class="section-title">
+Nuestro <span>Objetivo</span>
+</h2>
+
+<div class="about-box">
+
+<p>
+Crear una economía descentralizada donde cualquier persona
+pueda acceder a herramientas financieras seguras, rápidas
+y transparentes.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+    
+<!-- FUNDADORES -->
+<section class="founders-section" id="founders">
+
+<div class="container">
+
+    
+<!-- CONTACTO -->
+
+<section id="contacto">
+    <div class="container">
+        <h2 class="section-title">Contácta<span>nos</span></h2>
+
+    <div class="contact-container">
+        <div class="contact-info">
+            <h3>Únete a la Comunidad</h3>
+            <div class="social-links">
+                <a 
+                    href="https://chat.whatsapp.com/Fydwr7LSnOwJTIW73ylV4q?s=sw&p=i&mlu=4"
+                    class="social-btn whatsapp"
+                    target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="contact-info">
+            <h3>Nuestra experiencia</h3>
+            <div class="social-links">
+                <a 
+                    href="https://www.youtube.com/shorts/19U2HQQGLxk"
+                    class="social-btn youtube"
+                    target="_blank">
+                    <i class="fab fa-youtube"></i>
+                    YouTube
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+</section>
+
+<footer>
+    <p>© 2026 Proyecto ᚲᚺᛁ. Todos los derechos reservados.</p>
+</footer>
+
+<!-- BOTONES FLOTANTES -->
+<a 
+    href="https://chat.whatsapp.com/Fydwr7LSnOwJTIW73ylV4q?s=sw&p=i&mlu=4"
+    class="floating-whatsapp"
+    target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+    <script>
+    fetch('chi-data.json')
+        .then(response => response.json())
+        .then(data => {
+            const labels = data.labels;
+            const valores = data.valores;
+    
+            // --- Calcular Valor Actual y Crecimiento Semanal ---
+            const valorActual = valores[valores.length - 1];
+            const valorAnterior = valores[valores.length - 2];
+            const crecimiento = ((valorActual - valorAnterior) / valorAnterior) * 100;
+    
+            document.getElementById('valorActual').textContent = '$' + valorActual.toFixed(2);
+            document.getElementById('crecimientoSemanal').textContent =
+                (crecimiento >= 0 ? '+' : '') + crecimiento.toFixed(2) + '%';
+    
+            // Opcional: si el crecimiento es negativo, pinta la tarjeta en rojo en vez de verde
+            const cardCrecimiento = document.getElementById('crecimientoSemanal');
+            cardCrecimiento.style.color = crecimiento >= 0 ? '#57B61F' : '#e74c3c';
+    
+            // --- Gráfico ---
+            const ctx = document.getElementById('cryptoChart');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Valor ᚲᚺᛁ ',
+                        data: valores,
+                        borderColor:'#57B61F',
+                        backgroundColor:'rgba(87,182,31,.2)',
+                        fill:true,
+                        tension:0.4
+                    }]
+                },
+                options:{responsive:true,
+                    plugins:{
+                        legend:{
+                            labels:{color:'#fff'}
+                        }
                     },
-                    options:{responsive:true,
-                        plugins:{
-                            legend:{
-                                labels:{color:'#fff'}
+                    scales:{
+                        x:{
+                            ticks:{color:'#fff'},
+                            title:{
+                                display:true,
+                                text:'Semana (Inicio 4 semana de Abril)',
+                                color:'#888',
+                                font:{ size:13 }
                             }
                         },
-                        scales:{
-                            x:{
-                                ticks:{color:'#fff'},
-                                title:{
-                                    display:true,
-                                    text:'Semana (Inicio 4 semana de Abril)',
-                                    color:'#888',
-                                    font:{ size:13 }
-                                }
-                            },
-                            y:{
-                                ticks:{color:'#fff'},
-                                title:{
-                                    display:true,
-                                    text:'Valor en COP',
-                                    color:'#888',
-                                    font:{ size:13 }
-                                }
+                        y:{
+                            ticks:{color:'#fff'},
+                            title:{
+                                display:true,
+                                text:'Valor en COP',
+                                color:'#888',
+                                font:{ size:13 }
                             }
                         }
                     }
-                });
+                }
+            });
+        })
+        .catch(error => console.error('Error cargando los datos del gráfico:', error));
+
+    // --- Tarjetas: último valor de cada archivo JSON ---
+    const ultimo = (file, id) =>
+        fetch(file)
+            .then(r => r.json())
+            .then(d => {
+                const v = d.valores[d.valores.length - 1];
+                document.getElementById(id).textContent = Number(v).toLocaleString('es-CO');
             })
-            .catch(error => console.error('Error cargando los datos del gráfico:', error));
-        </script>
-        <script>
-            const track = document.getElementById('foundersTrack');
-            const cards = document.querySelectorAll('.founder-card');
-            const total = cards.length;
-            let currentIndex = 0;
-            function updateCarousel(){
-                track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                track.style.transition = '0.5s ease';
+            .catch(e => console.error('Error cargando ' + file, e));
+
+    ultimo('chi-miembros.json', 'miembrosUnicos');
+    ultimo('chi-comercios.json', 'comerciosVinculados');
+    </script>
+    <script>
+        const track = document.getElementById('foundersTrack');
+        const cards = document.querySelectorAll('.founder-card');
+        const total = cards.length;
+        let currentIndex = 0;
+        function updateCarousel(){
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            track.style.transition = '0.5s ease';
+        }
+        function nextFounder(){
+            currentIndex++;
+            if(currentIndex >= total){
+                currentIndex = 0;
             }
-            function nextFounder(){
-                currentIndex++;
-                if(currentIndex >= total){
-                    currentIndex = 0;
-                }
-                updateCarousel();
+            updateCarousel();
+        }
+        function prevFounder(){
+            currentIndex--;
+            if(currentIndex < 0){
+                currentIndex = total - 1;
             }
-            function prevFounder(){
-                currentIndex--;
-                if(currentIndex < 0){
-                    currentIndex = total - 1;
-                }
-                updateCarousel();
-            }
-            setInterval(nextFounder,5000);
-        </script>
-        <script>
-            const menuToggle = document.getElementById('menuToggle');
-            const mainNav = document.getElementById('mainNav');
-        
-            if (menuToggle && mainNav) {
-                menuToggle.addEventListener('click', () => {
-                    mainNav.classList.toggle('active');
+            updateCarousel();
+        }
+        setInterval(nextFounder,5000);
+    </script>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+    
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+            });
+    
+            document.querySelectorAll('#mainNav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mainNav.classList.remove('active');
                 });
-        
-                document.querySelectorAll('#mainNav a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        mainNav.classList.remove('active');
-                    });
-                });
-            }
-        </script>
-    </body>
-    </html>
+            });
+        }
+    </script>
+</body>
+</html>
