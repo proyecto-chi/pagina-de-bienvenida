@@ -1,0 +1,23 @@
+{
+  "nota": "EJEMPLO: reemplaza con tus datos. Debe tener las mismas semanas (labels) que chi-data.json.",
+  "labels": [
+    "Semana 1",
+    "Semana 2",
+    "Semana 3",
+    "Semana 4",
+    "Semana 5",
+    "Semana 6",
+    "Semana 7",
+    "Semana 8"
+  ],
+  "valores": [
+    12,
+    18,
+    25,
+    31,
+    40,
+    38,
+    52,
+    60
+  ]
+}

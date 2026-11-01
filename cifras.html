@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ᚲᚺᛁ | Cifras</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root{
+    --green:#57B61F;
+    --green-light:#6dd629;
+    --red:#e74c3c;
+    --black:#0B0B0B;
+    --card:#171717;
+    --line:#2a2a2a;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:#fff;}
+.container{width:92%;max-width:1200px;margin:auto;}
+
+/* HEADER (igual al landing) */
+header{position:fixed;width:100%;top:0;z-index:1000;background:rgba(0,0,0,.90);backdrop-filter:blur(10px);}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:20px 0;}
+.logo{display:flex;align-items:center;gap:15px;}
+.logo img{width:55px;}
+.logo h2{color:var(--green);}
+nav ul{list-style:none;display:flex;gap:25px;}
+nav a{color:#fff;text-decoration:none;transition:.3s;}
+nav a:hover,nav a.active{color:var(--green);}
+.menu-toggle{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;padding:5px 10px;}
+
+/* PÁGINA */
+main{padding:120px 0 60px;}
+.page-title{font-size:2.4rem;margin-bottom:6px;}
+.page-title span{color:var(--green);}
+.page-sub{color:#aaa;font-size:.95rem;margin-bottom:26px;}
+
+/* FILTROS */
+.filters{
+    position:sticky;top:95px;z-index:50;
+    background:rgba(17,17,17,.96);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:16px;
+    padding:16px;margin-bottom:26px;
+    display:flex;flex-wrap:wrap;gap:16px 24px;align-items:flex-end;
+}
+.f-group{display:flex;flex-direction:column;gap:6px;}
+.f-label{font-size:.75rem;color:#999;}
+.quick{display:flex;gap:8px;flex-wrap:wrap;}
+.pill{
+    border:1px solid var(--line);background:#141414;color:#ccc;
+    padding:9px 16px;border-radius:50px;font-size:.82rem;font-weight:500;
+    cursor:pointer;transition:.25s;
+}
+.pill:hover{border-color:var(--green);color:#fff;}
+.pill.active{background:var(--green);border-color:var(--green);color:#fff;}
+.f-row{display:flex;gap:10px;}
+select,input[type=date]{
+    background:#141414;color:#fff;border:1px solid var(--line);
+    border-radius:10px;padding:9px 10px;font-size:.85rem;min-width:130px;
+    color-scheme:dark;
+}
+select:focus,input:focus,.pill:focus-visible,.expand:focus-visible,.close:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
+.reset{background:none;border:none;color:var(--green);font-size:.82rem;cursor:pointer;padding:9px 4px;}
+.range-info{font-size:.8rem;color:#999;margin-left:auto;align-self:center;}
+
+/* GRÁFICAS */
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.chart-card{background:var(--card);border:1px solid #232323;border-radius:18px;padding:20px;}
+.chart-card.wide{grid-column:1 / -1;}
+.chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;}
+.chart-head h3{font-size:1.05rem;font-weight:600;}
+.chart-head p{font-size:.78rem;color:#888;margin-top:3px;}
+.expand,.close{
+    flex-shrink:0;width:40px;height:40px;border-radius:50%;
+    border:1px solid var(--line);background:#141414;color:#fff;
+    font-size:15px;cursor:pointer;transition:.25s;
+}
+.expand:hover,.close:hover{background:var(--green);border-color:var(--green);}
+.chart-wrap{position:relative;height:300px;cursor:zoom-in;}
+.chart-card.wide .chart-wrap{height:340px;}
+.nodata{display:none;text-align:center;color:#888;font-size:.85rem;padding:70px 0;}
+.empty{display:none;text-align:center;color:#999;padding:60px 0;}
+
+/* MODAL */
+.modal{
+    position:fixed;inset:0;z-index:3000;display:none;
+    background:rgba(0,0,0,.88);backdrop-filter:blur(6px);
+    align-items:center;justify-content:center;
+}
+.modal.open{display:flex;}
+.modal-box{
+    width:94vw;height:88vh;max-width:1400px;
+    background:var(--card);border:1px solid var(--line);border-radius:18px;
+    display:flex;flex-direction:column;padding:16px;
+}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;}
+.modal-head h3{font-size:1.1rem;}
+.modal-hint{font-size:.75rem;color:#888;margin-top:2px;}
+.modal-body{position:relative;flex:1;min-height:0;}
+body.lock{overflow:hidden;}
+
+footer{padding:40px;text-align:center;border-top:1px solid #222;}
+footer p{color:#888;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .menu-toggle{display:block;}
+    nav{display:none;position:fixed;top:95px;left:0;width:100%;background:rgba(0,0,0,.97);backdrop-filter:blur(10px);border-top:1px solid #222;}
+    nav.active{display:block;}
+    nav ul{flex-direction:column;align-items:center;gap:0;padding:10px 0;}
+    nav ul li{width:100%;text-align:center;}
+    nav ul li a{display:block;padding:15px 0;}
+    .charts{grid-template-columns:1fr;}
+    .page-title{font-size:1.9rem;}
+    .filters{position:static;}
+    .range-info{margin-left:0;width:100%;}
+}
+@media(max-width:600px){
+    .chart-wrap,.chart-card.wide .chart-wrap{height:260px;}
+    .chart-card{padding:14px;}
+    .f-group{width:100%;}
+    .f-row select,.f-row input{flex:1;min-width:0;}
+    .modal-box{width:100vw;height:100dvh;border-radius:0;border:none;padding:12px;}
+}
+@media(max-height:500px) and (orientation:landscape){
+    .modal-box{width:100vw;height:100dvh;border-radius:0;padding:8px 12px;}
+    .modal-hint{display:none;}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container navbar">
+    <div class="logo">
+        <img src="chi_logo.png" alt="ᚲᚺᛁ">
+        <h2>ᚲᚺᛁ</h2>
+    </div>
+    <nav id="mainNav">
+        <ul>
+            <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+            <li><a href="index.html#about">Quiénes Somos</a></li>
+            <li><a href="index.html#goal">Objetivo</a></li>
+            <li><a href="cifras.html" class="active">Cifras</a></li>
+            <li><a href="testimonios.html">Testimonios</a></li>
+            <li><a href="comercios.html">Mercado</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+</div>
+</header>
+
+<main>
+<div class="container">
+
+    <h1 class="page-title">Cifras de <span>ᚲᚺᛁ</span></h1>
+    <p class="page-sub">Toca una gráfica para verla en pantalla completa.</p>
+
+    <!-- FILTROS -->
+    <section class="filters" aria-label="Filtros">
+        <div class="f-group">
+            <span class="f-label">Periodo</span>
+            <div class="quick" id="quick">
+                <button class="pill" data-n="4">4 semanas</button>
+                <button class="pill" data-n="8">8 semanas</button>
+                <button class="pill" data-n="12">12 semanas</button>
+                <button class="pill active" data-n="0">Todo</button>
+            </div>
+        </div>
+
+        <div class="f-group">
+            <span class="f-label">Por semana</span>
+            <div class="f-row">
+                <select id="from" aria-label="Desde la semana"></select>
+                <select id="to" aria-label="Hasta la semana"></select>
+            </div>
+        </div>
+
+        <div class="f-group" id="dateBox" hidden>
+            <span class="f-label">Por fecha</span>
+            <div class="f-row">
+                <input type="date" id="dFrom" aria-label="Fecha desde">
+                <input type="date" id="dTo" aria-label="Fecha hasta">
+            </div>
+        </div>
+
+        <button class="reset" id="reset">Restablecer</button>
+        <span class="range-info" id="rangeInfo"></span>
+    </section>
+
+    <p class="empty" id="empty">No se pudieron cargar los datos. Revisa que chi-data.json esté en la misma carpeta.</p>
+
+    <!-- GRÁFICAS -->
+    <div class="charts" id="charts"></div>
+
+</div>
+</main>
+
+<!-- MODAL PANTALLA COMPLETA -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="modal-box">
+        <div class="modal-head">
+            <div>
+                <h3 id="mTitle"></h3>
+                <p class="modal-hint">Gira el celular para ver más detalle. Toca un punto para ver su valor.</p>
+            </div>
+            <button class="close" id="mClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body"><canvas id="mCanvas"></canvas></div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 Proyecto ᚲᚺᛁ. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+(function(){
+    /* ---------- Definición de gráficas: cada una lee su propio JSON ---------- */
+    const FILES = {
+        valor:'chi-data.json',
+        comercios:'chi-comercios.json',
+        transacciones:'chi-transacciones.json',
+        miembros:'chi-miembros.json'
+    };
+    const CHARTS = [
+        {key:'valor',         src:'valor', type:'line', unit:'cop', color:'#57B61F', wide:true,
+         title:'Valor de ᚲᚺᛁ', sub:'Valor en COP al cierre de cada semana'},
+        {key:'semanal',       src:'valor', mode:'semanal', type:'bar', unit:'pct', diverging:true,
+         title:'Crecimiento semanal', sub:'Cambio porcentual frente a la semana anterior'},
+        {key:'acumulada',     src:'valor', mode:'acumulada', type:'line', unit:'pct', color:'#6dd629',
+         title:'Variación acumulada', sub:'Cambio porcentual desde la primera semana del periodo'},
+        {key:'comercios',     src:'comercios', type:'line', unit:'num', color:'#57B61F',
+         title:'Comerciantes vinculados', sub:'Total al cierre de cada semana'},
+        {key:'transacciones', src:'transacciones', type:'bar', unit:'num', color:'#57B61F',
+         title:'Transacciones por semana', sub:'Cantidad de transacciones realizadas'},
+        {key:'miembros',      src:'miembros', type:'line', unit:'num', color:'#6dd629', wide:true,
+         title:'Miembros de la comunidad', sub:'Total al cierre de cada semana'}
+    ];
+
+    const DATA = {};              // src -> {labels, valores, fechas}
+    let M = {labels:[], fechas:null};   // eje maestro (chi-data.json)
+    let from = 0, to = 0;
+    const charts = {};
+    let modalChart = null, modalKey = null;
+
+    const $ = id => document.getElementById(id);
+    const num = v => Number(v).toLocaleString('es-CO',{maximumFractionDigits:2});
+    const fmt = (unit,v) => unit==='cop' ? '$'+Number(v).toLocaleString('es-CO',{minimumFractionDigits:2,maximumFractionDigits:2})
+                         : unit==='pct' ? (v>=0?'+':'')+Number(v).toFixed(2)+'%'
+                         : num(v);
+    const tick = (unit,v) => unit==='cop' ? '$'+num(v) : unit==='pct' ? v+'%' : num(v);
+
+    Chart.defaults.color = '#cfcfcf';
+    Chart.defaults.font.family = "'Poppins', sans-serif";
+
+    /* ---------- Render de tarjetas ---------- */
+    $('charts').innerHTML = CHARTS.map(c => `
+        <article class="chart-card${c.wide?' wide':''}">
+            <div class="chart-head">
+                <div><h3>${c.title}</h3><p>${c.sub}</p></div>
+                <button class="expand" data-chart="${c.key}" aria-label="Ampliar: ${c.title}"><i class="fa-solid fa-expand"></i></button>
+            </div>
+            <div class="chart-wrap" data-chart="${c.key}"><canvas id="c-${c.key}"></canvas></div>
+            <p class="nodata" id="n-${c.key}">Sin datos. Falta el archivo ${FILES[c.src]}.</p>
+        </article>`).join('');
+
+    /* ---------- Rango por gráfica (filtro global aplicado por etiqueta) ---------- */
+    function range(d){
+        const n = d.labels.length;
+        let i = d.labels.indexOf(M.labels[from]);
+        let j = d.labels.indexOf(M.labels[to]);
+        if(i < 0) i = Math.min(from, n-1);
+        if(j < 0) j = Math.min(to, n-1);
+        return i > j ? [j,i] : [i,j];
+    }
+    function series(c){
+        const d = DATA[c.src]; if(!d) return null;
+        const [i,j] = range(d);
+        const v = d.valores;
+        let vals;
+        if(c.mode === 'semanal')       vals = v.map((x,k)=> k ? ((x-v[k-1])/v[k-1])*100 : null).slice(i,j+1);
+        else if(c.mode === 'acumulada') vals = v.slice(i,j+1).map(x=> ((x-v[i])/v[i])*100);
+        else                            vals = v.slice(i,j+1);
+        return {labels:d.labels.slice(i,j+1), vals};
+    }
+
+    /* ---------- Configuración de Chart.js ---------- */
+    function config(c, big){
+        const s = series(c);
+        const mobile = window.innerWidth < 600;
+        const fs = big ? 13 : 11;
+        const dense = s.vals.length > 26;
+        const opts = {
+            responsive:true, maintainAspectRatio:false,
+            interaction:{mode:'index', intersect:false},
+            plugins:{
+                legend:{display:false},
+                tooltip:{
+                    backgroundColor:'#0B0B0B', borderColor:'#57B61F', borderWidth:1,
+                    padding:12, displayColors:false,
+                    titleFont:{size:big?14:12}, bodyFont:{size:big?14:12},
+                    callbacks:{label: x => x.parsed.y==null ? 'Sin semana anterior' : fmt(c.unit, x.parsed.y)}
+                }
+            },
+            scales:{
+                x:{ticks:{maxTicksLimit: big ? (mobile?6:14) : (mobile?5:10), maxRotation:0, autoSkip:true, font:{size:fs}},
+                   grid:{color:'rgba(255,255,255,.05)'}},
+                y:{ticks:{font:{size:fs}, callback:v=>tick(c.unit,v)}, grid:{color:'rgba(255,255,255,.07)'}}
+            }
+        };
+        if(c.type === 'bar'){
+            return {type:'bar', options:opts, data:{labels:s.labels, datasets:[{
+                data:s.vals, borderRadius:4, maxBarThickness:36,
+                backgroundColor: c.diverging
+                    ? s.vals.map(x=> x==null ? 'transparent' : (x>=0 ? 'rgba(87,182,31,.85)' : 'rgba(231,76,60,.85)'))
+                    : c.color
+            }]}};
+        }
+        return {type:'line', options:opts, data:{labels:s.labels, datasets:[{
+            data:s.vals, borderColor:c.color, backgroundColor:c.color+'2e', fill:true, tension:.35,
+            borderWidth:big?3:2, pointRadius:dense?0:(big?4:3), pointHoverRadius:7, pointBackgroundColor:c.color
+        }]}};
+    }
+
+    const byKey = k => CHARTS.find(c=>c.key===k);
+
+    function draw(){
+        CHARTS.forEach(c=>{
+            if(charts[c.key]){ charts[c.key].destroy(); charts[c.key]=null; }
+            const ok = !!DATA[c.src];
+            $('c-'+c.key).style.display = ok ? '' : 'none';
+            $('n-'+c.key).style.display = ok ? 'none' : 'block';
+            if(ok) charts[c.key] = new Chart($('c-'+c.key), config(c,false));
+        });
+        if(modalChart){ modalChart.destroy(); modalChart = new Chart($('mCanvas'), config(byKey(modalKey),true)); }
+        $('rangeInfo').textContent = M.labels[from] + ' → ' + M.labels[to] + ' · ' + (to-from+1) + ' semanas';
+    }
+
+    /* ---------- Filtros ---------- */
+    function fillSelects(){
+        const o = M.labels.map((l,i)=>`<option value="${i}">${l}</option>`).join('');
+        $('from').innerHTML = o; $('to').innerHTML = o;
+    }
+    function apply(activeN){
+        if(from > to){ const t=from; from=to; to=t; }
+        $('from').value = from; $('to').value = to;
+        document.querySelectorAll('#quick .pill').forEach(p=>
+            p.classList.toggle('active', activeN !== undefined && Number(p.dataset.n) === activeN));
+        if(M.fechas){ $('dFrom').value = M.fechas[from]; $('dTo').value = M.fechas[to]; }
+        draw();
+    }
+    $('quick').addEventListener('click', e=>{
+        const b = e.target.closest('.pill'); if(!b) return;
+        const n = Number(b.dataset.n), last = M.labels.length-1;
+        to = last; from = n===0 ? 0 : Math.max(0, last-n+1);
+        apply(n);
+    });
+    $('from').addEventListener('change', e=>{ from = Number(e.target.value); apply(); });
+    $('to').addEventListener('change',   e=>{ to   = Number(e.target.value); apply(); });
+    function byDate(){
+        const f = $('dFrom').value, t = $('dTo').value, F = M.fechas;
+        const i = f ? F.findIndex(d=>d>=f) : 0;
+        const j = t ? F.map(d=>d<=t).lastIndexOf(true) : F.length-1;
+        if(i<0 || j<0 || i>j) return;
+        from = i; to = j; apply();
+    }
+    $('dFrom').addEventListener('change', byDate);
+    $('dTo').addEventListener('change', byDate);
+    $('reset').addEventListener('click', ()=>{ from = 0; to = M.labels.length-1; apply(0); });
+
+    /* ---------- Modal pantalla completa ---------- */
+    function openModal(key){
+        if(!DATA[byKey(key).src]) return;
+        modalKey = key;
+        $('mTitle').textContent = byKey(key).title;
+        $('modal').classList.add('open');
+        document.body.classList.add('lock');
+        modalChart = new Chart($('mCanvas'), config(byKey(key),true));
+        $('mClose').focus();
+    }
+    function closeModal(){
+        $('modal').classList.remove('open');
+        document.body.classList.remove('lock');
+        if(modalChart){ modalChart.destroy(); modalChart = null; }
+    }
+    $('charts').addEventListener('click', e=>{
+        const el = e.target.closest('[data-chart]'); if(el) openModal(el.dataset.chart);
+    });
+    $('mClose').addEventListener('click', closeModal);
+    $('modal').addEventListener('click', e=>{ if(e.target === $('modal')) closeModal(); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    let rt;
+    window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(draw, 200); });
+
+    /* ---------- Menú móvil ---------- */
+    $('menuToggle').addEventListener('click', ()=> $('mainNav').classList.toggle('active'));
+    document.querySelectorAll('#mainNav a').forEach(a=> a.addEventListener('click', ()=> $('mainNav').classList.remove('active')));
+
+    /* ---------- Carga: un JSON por gráfica; si uno falta, solo esa tarjeta queda sin datos ---------- */
+    const ERR = {};
+    const load = f => fetch(f).then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+        .catch(e => { ERR[f] = e.message; console.error('No se pudo cargar '+f+':', e); return null; });
+    Promise.all(Object.entries(FILES).map(([k,f]) => load(f).then(d => [k,d]))).then(res=>{
+        res.forEach(([k,d])=>{
+            if(d && Array.isArray(d.labels) && Array.isArray(d.valores)){
+                const n = Math.min(d.labels.length, d.valores.length);   // tolera largos distintos
+                DATA[k] = {labels:d.labels.slice(0,n), valores:d.valores.slice(0,n).map(Number),
+                           fechas:(Array.isArray(d.fechas) && d.fechas.length >= n) ? d.fechas.slice(0,n) : null};
+            } else if(d){ ERR[FILES[k]] = 'el JSON debe tener "labels" y "valores" (arreglos)'; }
+        });
+        if(!DATA.valor){
+            $('charts').style.display='none';
+            const e = $('empty'); e.style.display='block';
+            e.textContent = location.protocol === 'file:'
+                ? 'El navegador bloquea la carga de datos al abrir el archivo con doble clic. Ábrela desde un servidor (por ejemplo, python -m http.server) o desde tu sitio publicado.'
+                : 'No se pudo cargar chi-data.json' + (ERR['chi-data.json'] ? ' (' + ERR['chi-data.json'] + ')' : '') + '. Revisa la consola del navegador (F12) para más detalle.';
+            return;
+        }
+        M = {labels:DATA.valor.labels, fechas:DATA.valor.fechas};
+        if(M.fechas){
+            $('dateBox').hidden = false;
+            $('dFrom').min = $('dTo').min = M.fechas[0];
+            $('dFrom').max = $('dTo').max = M.fechas[M.fechas.length-1];
+        }
+        fillSelects();
+        from = 0; to = M.labels.length-1;
+        apply(0);
+    });
+})();
+</script>
+</body>
+</html>
