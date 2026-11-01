@@ -104,6 +104,28 @@ select:focus,input:focus,.pill:focus-visible,.expand:focus-visible,.close:focus-
 .modal-body{position:relative;flex:1;min-height:0;}
 body.lock{overflow:hidden;}
 
+
+/* NOTICIAS */
+.news{margin-top:50px;}
+.news-title{font-size:1.6rem;margin-bottom:6px;}
+.news-sub{color:#aaa;font-size:.9rem;margin-bottom:20px;}
+.news-list{display:flex;flex-direction:column;gap:14px;}
+.news-item{background:var(--card);border:1px solid #232323;border-radius:16px;padding:20px;display:grid;grid-template-columns:130px 1fr;gap:6px 22px;}
+.news-item time{color:var(--green);font-size:.82rem;font-weight:600;padding-top:3px;}
+.news-desc{font-size:1rem;line-height:1.6;color:#eee;}
+.news-body{grid-column:2;color:#cfcfcf;font-size:.92rem;line-height:1.75;white-space:pre-line;margin-top:6px;}
+.news-body[hidden]{display:none;}
+.news-actions{grid-column:2;display:flex;gap:18px;flex-wrap:wrap;margin-top:6px;}
+.news-actions button,.news-actions a{background:none;border:none;color:var(--green);font-size:.85rem;font-weight:500;cursor:pointer;text-decoration:none;padding:6px 0;}
+.news-actions button:hover,.news-actions a:hover{color:var(--green-light);}
+.news-actions button:focus-visible,.news-actions a:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
+.news-more{margin-top:16px;}
+.news-empty{color:#888;font-size:.9rem;}
+@media(max-width:600px){
+    .news-item{grid-template-columns:1fr;padding:16px;}
+    .news-body,.news-actions{grid-column:1;}
+}
+
 footer{padding:40px;text-align:center;border-top:1px solid #222;}
 footer p{color:#888;}
 
@@ -200,6 +222,14 @@ footer p{color:#888;}
 
     <!-- GRÁFICAS -->
     <div class="charts" id="charts"></div>
+
+    <!-- NOTICIAS -->
+    <section class="news" id="noticias" aria-labelledby="newsTitle">
+        <h2 class="news-title" id="newsTitle">Últimas noticias</h2>
+        <p class="news-sub">Lo más reciente del proyecto.</p>
+        <div class="news-list" id="newsList"></div>
+        <button class="pill news-more" id="newsMore" hidden>Ver más noticias</button>
+    </section>
 
 </div>
 </main>
@@ -435,6 +465,67 @@ footer p{color:#888;}
         from = 0; to = M.labels.length-1;
         apply(0);
     });
+})();
+</script>
+<script>
+(function(){
+    const FILE = 'chi-noticias.json';
+    const VISIBLE = 3;                       // cuántas se muestran al inicio
+    const list = document.getElementById('newsList');
+    const moreBtn = document.getElementById('newsMore');
+    let items = [], showAll = false;
+
+    const fmtDate = s => {
+        const d = new Date(s + 'T00:00:00');   // evita desfase de zona horaria
+        return isNaN(d) ? s : d.toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'});
+    };
+    const el = (tag, cls, text) => { const e = document.createElement(tag); if(cls) e.className = cls; if(text != null) e.textContent = text; return e; };
+
+    function render(){
+        list.innerHTML = '';
+        if(!items.length){ list.appendChild(el('p','news-empty','Aún no hay noticias publicadas.')); moreBtn.hidden = true; return; }
+        (showAll ? items : items.slice(0,VISIBLE)).forEach((n,i)=>{
+            const art = el('article','news-item');
+            const t = el('time', null, fmtDate(n.fecha)); t.dateTime = n.fecha;
+            art.appendChild(t);
+            art.appendChild(el('p','news-desc', n.descripcion || ''));
+            const actions = el('div','news-actions');
+            if(n.noticia){
+                const body = el('div','news-body', n.noticia); body.hidden = true; body.id = 'news-body-' + i;
+                const btn = el('button', null, 'Leer noticia');
+                btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-controls', body.id);
+                btn.addEventListener('click', ()=>{
+                    const open = body.hidden;
+                    body.hidden = !open;
+                    btn.setAttribute('aria-expanded', String(open));
+                    btn.textContent = open ? 'Ocultar noticia' : 'Leer noticia';
+                });
+                art.appendChild(body);
+                actions.appendChild(btn);
+            }
+            if(n.enlace){
+                const a = el('a', null, 'Ver fuente'); a.href = n.enlace; a.target = '_blank'; a.rel = 'noopener noreferrer';
+                actions.appendChild(a);
+            }
+            if(actions.children.length) art.appendChild(actions);
+            list.appendChild(art);
+        });
+        moreBtn.hidden = items.length <= VISIBLE;
+        moreBtn.textContent = showAll ? 'Ver menos' : 'Ver más noticias (' + (items.length - VISIBLE) + ')';
+    }
+
+    moreBtn.addEventListener('click', ()=>{ showAll = !showAll; render(); });
+
+    fetch(FILE)
+        .then(r => { if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(d => {
+            const arr = Array.isArray(d) ? d : (d && d.noticias);
+            items = (Array.isArray(arr) ? arr : [])
+                .filter(n => n && n.fecha && (n.descripcion || n.noticia))
+                .sort((a,b) => b.fecha.localeCompare(a.fecha));   // más reciente primero
+            render();
+        })
+        .catch(e => { console.error('No se pudo cargar ' + FILE + ':', e); render(); });
 })();
 </script>
 </body>
